@@ -8,11 +8,16 @@ const users: User[] = [
   { id: 2, login: 'user1', name: 'User1', password: 'Pass@1234' },
   { id: 3, login: 'c', name: 'User2', password: 'Pass@1234' },
 ];
-
+let lastUserId = 4;
 @Injectable()
 export class UsersService {
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    const newUser: User = {
+      id: lastUserId++,
+      ...createUserDto,
+    };
+    users.push(newUser);
+    return newUser;
   }
 
   findAll() {
