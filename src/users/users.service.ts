@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
-const users: User[] = [
+let users: User[] = [
   { id: 1, login: 'admin', name: 'Administrator', password: 'Pass@1234' },
   { id: 2, login: 'user1', name: 'User1', password: 'Pass@1234' },
   { id: 3, login: 'user2', name: 'User2', password: 'Pass@1234' },
@@ -61,5 +61,15 @@ export class UsersService {
     const deletedUser = users[index];
     users.splice(index, 1);
     return deletedUser;
+  }
+
+  reset() {
+    users = [
+      { id: 1, login: 'admin', name: 'Administrator', password: 'Pass@1234' },
+      { id: 2, login: 'user1', name: 'User1', password: 'Pass@1234' },
+      { id: 3, login: 'user2', name: 'User2', password: 'Pass@1234' },
+    ];
+    lastUserId = 4;
+    return 'RESET';
   }
 }
