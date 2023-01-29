@@ -6,7 +6,7 @@ import { User } from './entities/user.entity';
 const users: User[] = [
   { id: 1, login: 'admin', name: 'Administrator', password: 'Pass@1234' },
   { id: 2, login: 'user1', name: 'User1', password: 'Pass@1234' },
-  { id: 3, login: 'c', name: 'User2', password: 'Pass@1234' },
+  { id: 3, login: 'user2', name: 'User2', password: 'Pass@1234' },
 ];
 let lastUserId = 4;
 @Injectable()
@@ -35,7 +35,20 @@ export class UsersService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    const index = users.findIndex((user) => {
+      return user.id === id;
+    });
+    if (index < 0) {
+      throw new NotFoundException();
+    }
+    //console.log('user ' + JSON.stringify(users[index]));
+    //console.log('update ' + JSON.stringify(updateUserDto));
+    const updateUser: User = {
+      ...users[index],
+      ...updateUserDto,
+    };
+    users[index] = updateUser;
+    return updateUser;
   }
 
   remove(id: number) {
