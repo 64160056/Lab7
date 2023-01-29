@@ -3,7 +3,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 
-const products: Product[] = [
+let products: Product[] = [
   { id: 1, name: 'product1', price: 500 },
   { id: 2, name: 'product2', price: 1500 },
   { id: 3, name: 'product3', price: 1000 },
@@ -61,5 +61,14 @@ export class ProductService {
     const deletedProduct = products[index];
     products.splice(index, 1);
     return deletedProduct;
+  }
+  reset() {
+    products = [
+      { id: 1, name: 'product1', price: 500 },
+      { id: 2, name: 'product2', price: 1500 },
+      { id: 3, name: 'product3', price: 1000 },
+    ];
+    lastProductId = 4;
+    return 'RESET';
   }
 }

@@ -20,6 +20,11 @@ export class ProductController {
     return this.productService.create(createProductDto);
   }
 
+  @Get('reset/')
+  reset() {
+    return this.productService.reset();
+  }
+
   @Get()
   findAll() {
     return this.productService.findAll();
