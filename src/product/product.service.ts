@@ -34,11 +34,32 @@ export class ProductService {
     return products[index];
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  update(id: number, updateUserDto: UpdateProductDto) {
+    const index = products.findIndex((user) => {
+      return user.id === id;
+    });
+    if (index < 0) {
+      throw new NotFoundException();
+    }
+    //console.log('user ' + JSON.stringify(users[index]));
+    //console.log('update ' + JSON.stringify(updateUserDto));
+    const updateProduct: Product = {
+      ...products[index],
+      ...updateUserDto,
+    };
+    products[index] = updateProduct;
+    return updateProduct;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} product`;
+    const index = products.findIndex((product) => {
+      return product.id === id;
+    });
+    if (index < 0) {
+      throw new NotFoundException();
+    }
+    const deletedProduct = products[index];
+    products.splice(index, 1);
+    return deletedProduct;
   }
 }
