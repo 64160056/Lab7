@@ -52,6 +52,14 @@ export class UsersService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    const index = users.findIndex((user) => {
+      return user.id === id;
+    });
+    if (index < 0) {
+      throw new NotFoundException();
+    }
+    const deletedUser = users[index];
+    users.splice(index, 1);
+    return deletedUser;
   }
 }
