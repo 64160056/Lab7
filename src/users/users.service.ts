@@ -14,7 +14,7 @@ export class UsersService {
   create(createUserDto: CreateUserDto) {
     const newUser: User = {
       id: lastUserId++,
-      ...createUserDto,
+      ...createUserDto, //login, name, password
     };
     users.push(newUser);
     return newUser;
