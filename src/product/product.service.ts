@@ -31,7 +31,7 @@ export class ProductService {
     if (index < 0) {
       throw new NotFoundException();
     }
-    return `This action returns a #${id} product`;
+    return products[index];
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
